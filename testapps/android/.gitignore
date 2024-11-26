@@ -1,12 +1,10 @@
-
-
 *.iml
 .gradle
 /local.properties
 /.idea
 .DS_Store
-build
-.build
+/build
+/buildSrc/build
 /captures
 .externalNativeBuild
 .cxx
@@ -14,6 +12,3 @@ build
 *.xcbkptlist
 !/.idea/codeStyles/*
 !/.idea/inspectionProfiles/*
-.kotlin
-
-.swiftpm

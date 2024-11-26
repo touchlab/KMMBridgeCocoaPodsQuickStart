@@ -1,2 +1,12 @@
-# KMMBridgeCocoaPodsQuickStart
-KMMBridge v1 CocoaPods Template
+# KMMBridge v1 CocoaPods Template
+
+This is a template project for Kotlin Multiplatform using KMMBridge to publish Xcode Framework binaries.
+
+It is the template project that contains the shared library that is then consumed by the [Android template](https://github.com/touchlab/KMMBridgeCocoaPodsQuickStart-Android) and 
+the [iOS template](https://github.com/touchlab/KMMBridgeCocoaPodsQuickStart-iOS). 
+
+## Links
+
+* [KMMBridge CocoaPods Quick Start](https://touchlab.co/kmmbridge/cocoapodsquickstart) (For this template)
+* [KMMBridge v1 Blog Post](https://touchlab.co/kmmbridge-v1)
+* [KMMBridge Docs](https://touchlab.co/kmmbridge/)
