@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        //mavenLocal()
         google()
         gradlePluginPortal()
         mavenCentral()
@@ -10,6 +11,7 @@ pluginManagement {
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories {
+        //mavenLocal()
         google()
         mavenCentral()
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots")

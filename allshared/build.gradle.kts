@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kmmbridge)
     alias(libs.plugins.skie)
+    alias(libs.plugins.cocoapods)
     `maven-publish`
 }
 
@@ -11,12 +12,7 @@ kotlin {
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            export(project(":analytics"))
-            isStatic = true
-        }
-    }
+    )
 
     sourceSets {
         commonMain.dependencies {
@@ -24,9 +20,23 @@ kotlin {
             api(project(":analytics"))
         }
     }
+
+    cocoapods {
+        summary = "KMMBridgeCocoaPodsQuickStart"
+        homepage = "https://www.touchlab.co"
+        ios.deploymentTarget = "13.5"
+        extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
+        license = "BSD"
+        extraSpecAttributes.put("swift_version", "\"5.0\"") // <- SKIE Needs this!
+        framework {
+            export(project(":analytics"))
+            isStatic = true
+        }
+    }
 }
 
 kmmbridge {
     gitHubReleaseArtifacts()
-    cocoapods("git@github.com:<ORG>/<PODSPEC REPO>.git")
+    // Must be the SSH url
+    cocoapods("git@github.com:KevinSchildhorn/KMMBridgeCocoaTest-releases.git")
 }
