@@ -1,6 +1,6 @@
 name: KMM Bridge Github Workflow
 on:
-  workflow_call:
+  workflow_dispatch:
     secrets:
       gradle_params:
         required: false
