@@ -9,7 +9,7 @@ plugins {
 kotlin {
 
     listOf(
-//        iosX64(),
+        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     )
@@ -35,8 +35,10 @@ kotlin {
     }
 }
 
+addGithubPackagesRepository()
+
 kmmbridge {
-    gitHubReleaseArtifacts()
+    mavenPublishArtifacts()
     // Must be the SSH url
     cocoapods("git@github.com:touchlab/KMMBridgeCocoaTest-releases.git")
 }

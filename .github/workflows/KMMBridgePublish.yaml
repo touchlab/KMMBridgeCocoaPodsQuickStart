@@ -32,7 +32,7 @@ jobs:
 
       - uses: extractions/netrc@v1
         with:
-          machine: api.github.com
+          machine: maven.pkg.github.com
           username: "cirunner"
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -63,10 +63,3 @@ jobs:
         run: ./gradlew kmmBridgePublish -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
         env:
           GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
-
-      - uses: touchlab/ga-update-release-tag@v1
-        id: update-release-tag
-        with:
-          commitMessage: "KMP CocoaPods package release for ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagMessage: "KMP release version ${{ steps.versionPropertyValue.outputs.propVal }}"
-          tagVersion: ${{ steps.versionPropertyValue.outputs.propVal }}
