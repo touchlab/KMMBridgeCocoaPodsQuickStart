@@ -38,5 +38,5 @@ kotlin {
 kmmbridge {
     gitHubReleaseArtifacts()
     // Must be the SSH url
-    cocoapods("git@github.com:KevinSchildhorn/KMMBridgeCocoaTest-releases.git")
+    cocoapods("git@github.com:touchlab/KMMBridgeCocoaTest-releases.git")
 }
