@@ -8,11 +8,9 @@ plugins {
 
 kotlin {
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    )
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -27,7 +25,7 @@ kotlin {
         ios.deploymentTarget = "13.5"
         extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
         license = "BSD"
-        extraSpecAttributes.put("swift_version", "\"5.0\"") // <- SKIE Needs this!
+        extraSpecAttributes["swift_version"] = "\"5.0\"" // <- SKIE Needs this!
         framework {
             export(project(":analytics"))
             isStatic = true
