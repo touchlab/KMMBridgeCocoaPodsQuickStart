@@ -1,0 +1,65 @@
+name: KMMBridge iOS Publish
+on:
+  workflow_dispatch:
+    secrets:
+      gradle_params:
+        required: false
+      KMMBRIDGE_SSH_KEY:
+        required: false
+
+env:
+  KMMBRIDGE_SSH_KEY_EXISTS: ${{ secrets.KMMBRIDGE_SSH_KEY != ''}}
+
+jobs:
+  kmmbridgepublish:
+    concurrency: "kmmbridgepublish-${{ github.repository }}"
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Apply SSH Key
+        if: ${{ env.KMMBRIDGE_SSH_KEY_EXISTS }}
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.KMMBRIDGE_SSH_KEY }}
+
+      - uses: touchlab/read-property@0.1
+        id: versionPropertyValue
+        with:
+          file: ./gradle.properties
+          property: LIBRARY_VERSION
+
+      - uses: extractions/netrc@v1
+        with:
+          machine: maven.pkg.github.com
+          username: "cirunner"
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print versionPropertyValue
+        id: output
+        run: echo "${{ steps.versionPropertyValue.outputs.propVal }}"
+
+      - name: Touchlab Sample Sanity Check (Ignore this for your CI)
+        uses: touchlab/sample-group-sanity-check@main
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: 17
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Cache build tooling
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.konan
+          key: ${{ runner.os }}-v4-${{ hashFiles('*.gradle.kts') }}
+
+      - name: Build Main
+        run: ./gradlew kmmBridgePublish -PENABLE_PUBLISHING=true -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} -PGITHUB_REPO=${{ github.repository }} --no-daemon --info --stacktrace
+        env:
+          GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
