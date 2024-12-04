@@ -2,7 +2,7 @@
 
 This is a template project for Kotlin Multiplatform using KMMBridge to publish Xcode Framework binaries.
 
-It is the template project that contains the shared library that is then consumed by the [Android template](https://github.com/touchlab/KMMBridgeCocoaPodsQuickStart-Android) and 
+It is the template project that contains the shared library that is then consumed by the [Android template](https://github.com/touchlab/KMMBridgeSPMQuickStart-Android) and 
 the [iOS template](https://github.com/touchlab/KMMBridgeCocoaPodsQuickStart-iOS). 
 
 ## Links
