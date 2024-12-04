@@ -38,5 +38,5 @@ addGithubPackagesRepository()
 kmmbridge {
     mavenPublishArtifacts()
     // Must be the SSH url
-    cocoapods("git@github.com:touchlab/KMMBridgeCocoaTest-releases.git")
+    cocoapods("git@github.com:touchlab/kmmbridgecocoapodsquickstart-podspecs.git")
 }
