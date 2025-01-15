@@ -7,6 +7,10 @@ on:
       KMMBRIDGE_SSH_KEY:
         required: false
 
+permissions:
+  contents: write
+  packages: write
+  
 env:
   KMMBRIDGE_SSH_KEY_EXISTS: ${{ secrets.KMMBRIDGE_SSH_KEY != ''}}
 
