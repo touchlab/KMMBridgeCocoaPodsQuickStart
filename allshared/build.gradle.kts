@@ -33,10 +33,8 @@ kotlin {
     }
 }
 
-addGithubPackagesRepository()
-
 kmmbridge {
-    mavenPublishArtifacts()
+    gitHubReleaseArtifacts()
     // Must be the SSH url
     cocoapods("git@github.com:touchlab/kmmbridgecocoapodsquickstart-podspecs.git")
 }
